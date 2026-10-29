@@ -78,50 +78,88 @@
             //    Console.WriteLine($"{entry.Key} = {entry.Value}");
             //#endregion
 
-            #region Exercise 3: Phone Book
+            //            #region Exercise 3: Phone Book
+
+
+            //            Dictionary<string, string> phoneBook = new Dictionary<string, string>
+            //{
+            //    { "Ahmed", "01012345678" },
+            //    { "Sara",  "01198765432" },
+            //    { "Ali",   "01234567890" },
+            //    { "Mona",  "01555555555" }
+            //};
+
+
+            //            phoneBook["Omar"] = "01011112222";   // Add (new key)
+            //            phoneBook["Sara"] = "01100000000";   // Update (existing key)
+            //            Console.WriteLine($"Omar added: {phoneBook["Omar"]}");
+            //            Console.WriteLine($"Sara updated: {phoneBook["Sara"]}");
+
+
+            //            try
+            //            {
+            //                phoneBook.Add("Ahmed", "01099999999");
+            //            }
+            //            catch (ArgumentException ex)
+            //            {
+            //                Console.WriteLine($"Error: {ex.Message}");
+            //            }
+
+
+            //            bool added = phoneBook.TryAdd("Ahmed", "01099999999");
+            //            Console.WriteLine($"TryAdd Ahmed succeeded? {added}");
+
+
+            //            if (phoneBook.TryGetValue("Khaled", out string phone))
+            //                Console.WriteLine($"Khaled: {phone}");
+            //            else
+            //                Console.WriteLine("Khaled is not in the phone book");
+
+
+            //            string result = phoneBook.GetValueOrDefault("Khaled", "Not Found");
+            //            Console.WriteLine($"Khaled: {result}");
+
+
+            //            Console.WriteLine("Names: " + string.Join(", ", phoneBook.Keys));
+            //            Console.WriteLine("Phones: " + string.Join(", ", phoneBook.Values));
+            //            #endregion
+
+            #region Exercise 4: Unique Email Validator
+            
+            HashSet<string> emails = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
             
-            Dictionary<string, string> phoneBook = new Dictionary<string, string>
-{
-    { "Ahmed", "01012345678" },
-    { "Sara",  "01198765432" },
-    { "Ali",   "01234567890" },
-    { "Mona",  "01555555555" }
-};
+            Console.WriteLine($"Add ahmed@test.com: {emails.Add("ahmed@test.com")}");
+            Console.WriteLine($"Add AHMED@test.com: {emails.Add("AHMED@test.com")}");
+            Console.WriteLine($"Add sara@test.com: {emails.Add("sara@test.com")}");
+            Console.WriteLine($"Add Sara@Test.Com: {emails.Add("Sara@Test.Com")}");
+
+            Console.WriteLine($"Count: {emails.Count}");
+            Console.WriteLine("Stored: " + string.Join(", ", emails));
+            Console.WriteLine();
+
+            HashSet<int> setA = new HashSet<int> { 1, 2, 3, 4, 5 };
+            HashSet<int> setB = new HashSet<int> { 4, 5, 6, 7, 8 };
+
+
+            // UnionWith -> all elements from A and B (no duplicates)
+            HashSet<int> union = new HashSet<int>(setA);
+            union.UnionWith(setB);
+            Console.WriteLine("Union: " + string.Join(", ", union));
+
+            // IntersectWith -> only elements found in BOTH A and B
+            HashSet<int> intersect = new HashSet<int>(setA);
+            intersect.IntersectWith(setB);
+            Console.WriteLine("Intersect: " + string.Join(", ", intersect));
+
+            // ExceptWith -> elements in A that are NOT in B
+            HashSet<int> except = new HashSet<int>(setA);
+            except.ExceptWith(setB);
+            Console.WriteLine("Except: " + string.Join(", ", except));
 
             
-            phoneBook["Omar"] = "01011112222";   // Add (new key)
-            phoneBook["Sara"] = "01100000000";   // Update (existing key)
-            Console.WriteLine($"Omar added: {phoneBook["Omar"]}");
-            Console.WriteLine($"Sara updated: {phoneBook["Sara"]}");
-
-           
-            try
-            {
-                phoneBook.Add("Ahmed", "01099999999");
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
-
-            
-            bool added = phoneBook.TryAdd("Ahmed", "01099999999");
-            Console.WriteLine($"TryAdd Ahmed succeeded? {added}");
-
-           
-            if (phoneBook.TryGetValue("Khaled", out string phone))
-                Console.WriteLine($"Khaled: {phone}");
-            else
-                Console.WriteLine("Khaled is not in the phone book");
-
-            
-            string result = phoneBook.GetValueOrDefault("Khaled", "Not Found");
-            Console.WriteLine($"Khaled: {result}");
-
-           
-            Console.WriteLine("Names: " + string.Join(", ", phoneBook.Keys));
-            Console.WriteLine("Phones: " + string.Join(", ", phoneBook.Values));
+            HashSet<int> small = new HashSet<int> { 1, 2 };
+            Console.WriteLine( small.IsSubsetOf(setA));
             #endregion
         }
     }
