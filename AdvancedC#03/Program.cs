@@ -192,6 +192,44 @@
             else
                 Console.WriteLine(" Queue is empty, nothing to print");
             #endregion
+
+
+            #region Exercise 6: Browser History (Undo)
+         
+            Stack<string> history = new Stack<string>();
+
+            
+            history.Push("google.com");
+            history.Push("github.com");
+            history.Push("stackoverflow.com");
+            history.Push("youtube.com");
+            history.Push("claude.ai");
+
+            
+            Console.WriteLine("History: " + string.Join(", ", history));
+
+            
+            Console.WriteLine($"Current page: {history.Peek()}");
+
+          
+            for (int i = 0; i < 3; i++)
+            {
+                string leftPage = history.Pop();
+                Console.WriteLine($"Back: leaving {leftPage}");
+            }
+
+            
+            Console.WriteLine($"Current page: {history.Peek()}");
+
+           
+            history.Clear();
+            Console.WriteLine($"Count after Clear: {history.Count}");
+
+            if (history.TryPop(out string page))
+                Console.WriteLine($"Popped: {page}");
+            else
+                Console.WriteLine(" Stack is empty, no page to go back to");
+            #endregion
         }
     }
 }
