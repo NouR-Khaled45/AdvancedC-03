@@ -4,78 +4,124 @@
     {
         static void Main(string[] args)
         {
-            #region Exercise 1: Student Grade Manager
+            //#region Exercise 1: Student Grade Manager
 
 
-            List<int> grades = new List<int> { 85, 92, 78, 95, 88, 70, 100, 65 };
+            //List<int> grades = new List<int> { 85, 92, 78, 95, 88, 70, 100, 65 };
 
 
-            Console.WriteLine("Grades: " + string.Join(", ", grades));
-            Console.WriteLine($"Count: {grades.Count}");
-            Console.WriteLine($"First: {grades[0]}");
-            Console.WriteLine($"Last: {grades[grades.Count - 1]}");
+            //Console.WriteLine("Grades: " + string.Join(", ", grades));
+            //Console.WriteLine($"Count: {grades.Count}");
+            //Console.WriteLine($"First: {grades[0]}");
+            //Console.WriteLine($"Last: {grades[grades.Count - 1]}");
 
 
-            grades.Sort();
-            Console.WriteLine("Sorted: " + string.Join(", ", grades));
+            //grades.Sort();
+            //Console.WriteLine("Sorted: " + string.Join(", ", grades));
 
 
-            int firstAbove90 = grades.Find(g => g > 90);
-            Console.WriteLine($"First above 90: {firstAbove90}");
+            //int firstAbove90 = grades.Find(g => g > 90);
+            //Console.WriteLine($"First above 90: {firstAbove90}");
 
 
-            List<int> failing = grades.FindAll(g => g < 75);
-            Console.WriteLine("Failing: " + string.Join(", ", failing));
+            //List<int> failing = grades.FindAll(g => g < 75);
+            //Console.WriteLine("Failing: " + string.Join(", ", failing));
 
 
-            int removed = grades.RemoveAll(g => g < 75);
-            Console.WriteLine($"Removed {removed} failing grades: " + string.Join(", ", grades));
+            //int removed = grades.RemoveAll(g => g < 75);
+            //Console.WriteLine($"Removed {removed} failing grades: " + string.Join(", ", grades));
 
 
-            bool has100 = grades.Contains(100);
-            Console.WriteLine($"Has 100? {has100}");
+            //bool has100 = grades.Contains(100);
+            //Console.WriteLine($"Has 100? {has100}");
 
 
-            List<string> labels = new List<string>();
-            foreach (int g in grades)
-                labels.Add($"Grade: {g}");
+            //List<string> labels = new List<string>();
+            //foreach (int g in grades)
+            //    labels.Add($"Grade: {g}");
 
-            foreach (string label in labels)
-                Console.WriteLine(label);
-            #endregion
+            //foreach (string label in labels)
+            //    Console.WriteLine(label);
+            //#endregion
 
 
-            #region Exercise 2: Leaderboard
+            //#region Exercise 2: Leaderboard
 
-            SortedList<int, string> leaderboard = new SortedList<int, string>();
-            leaderboard.Add(500, "Ahmed");
-            leaderboard.Add(200, "Sara");
-            leaderboard.Add(800, "Ali");
-            leaderboard.Add(350, "Mona");
+            //SortedList<int, string> leaderboard = new SortedList<int, string>();
+            //leaderboard.Add(500, "Ahmed");
+            //leaderboard.Add(200, "Sara");
+            //leaderboard.Add(800, "Ali");
+            //leaderboard.Add(350, "Mona");
+
+
+            //Console.WriteLine("--- Leaderboard ---");
+            //foreach (var entry in leaderboard)
+            //    Console.WriteLine($"{entry.Key} = {entry.Value}");
+
+
+            //Console.WriteLine($"First Key: {leaderboard.Keys[0]}");
+            //Console.WriteLine($"First Value: {leaderboard.Values[0]}");
+
+
+            //Console.WriteLine($"Score 500 exists? {leaderboard.ContainsKey(500)}");
+
+
+            //if (leaderboard.TryGetValue(999, out string player))
+            //    Console.WriteLine($"Score 999: {player}");
+            //else
+            //    Console.WriteLine("Score 999: Not found");
+
+
+            //leaderboard.Remove(200);
+
+            //foreach (var entry in leaderboard)
+            //    Console.WriteLine($"{entry.Key} = {entry.Value}");
+            //#endregion
+
+            #region Exercise 3: Phone Book
 
             
-            Console.WriteLine("--- Leaderboard ---");
-            foreach (var entry in leaderboard)
-                Console.WriteLine($"{entry.Key} = {entry.Value}");
+            Dictionary<string, string> phoneBook = new Dictionary<string, string>
+{
+    { "Ahmed", "01012345678" },
+    { "Sara",  "01198765432" },
+    { "Ali",   "01234567890" },
+    { "Mona",  "01555555555" }
+};
+
+            
+            phoneBook["Omar"] = "01011112222";   // Add (new key)
+            phoneBook["Sara"] = "01100000000";   // Update (existing key)
+            Console.WriteLine($"Omar added: {phoneBook["Omar"]}");
+            Console.WriteLine($"Sara updated: {phoneBook["Sara"]}");
 
            
-            Console.WriteLine($"First Key: {leaderboard.Keys[0]}");
-            Console.WriteLine($"First Value: {leaderboard.Values[0]}");
+            try
+            {
+                phoneBook.Add("Ahmed", "01099999999");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
 
             
-            Console.WriteLine($"Score 500 exists? {leaderboard.ContainsKey(500)}");
+            bool added = phoneBook.TryAdd("Ahmed", "01099999999");
+            Console.WriteLine($"TryAdd Ahmed succeeded? {added}");
 
-        
-            if (leaderboard.TryGetValue(999, out string player))
-                Console.WriteLine($"Score 999: {player}");
+           
+            if (phoneBook.TryGetValue("Khaled", out string phone))
+                Console.WriteLine($"Khaled: {phone}");
             else
-                Console.WriteLine("Score 999: Not found");
+                Console.WriteLine("Khaled is not in the phone book");
 
             
-            leaderboard.Remove(200);
+            string result = phoneBook.GetValueOrDefault("Khaled", "Not Found");
+            Console.WriteLine($"Khaled: {result}");
+
            
-            foreach (var entry in leaderboard)
-                Console.WriteLine($"{entry.Key} = {entry.Value}");
+            Console.WriteLine("Names: " + string.Join(", ", phoneBook.Keys));
+            Console.WriteLine("Phones: " + string.Join(", ", phoneBook.Values));
             #endregion
         }
     }
