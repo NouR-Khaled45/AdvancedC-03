@@ -124,42 +124,73 @@
             //            Console.WriteLine("Phones: " + string.Join(", ", phoneBook.Values));
             //            #endregion
 
-            #region Exercise 4: Unique Email Validator
+            //#region Exercise 4: Unique Email Validator
+
+            //HashSet<string> emails = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+
+            //Console.WriteLine($"Add ahmed@test.com: {emails.Add("ahmed@test.com")}");
+            //Console.WriteLine($"Add AHMED@test.com: {emails.Add("AHMED@test.com")}");
+            //Console.WriteLine($"Add sara@test.com: {emails.Add("sara@test.com")}");
+            //Console.WriteLine($"Add Sara@Test.Com: {emails.Add("Sara@Test.Com")}");
+
+            //Console.WriteLine($"Count: {emails.Count}");
+            //Console.WriteLine("Stored: " + string.Join(", ", emails));
+            //Console.WriteLine();
+
+            //HashSet<int> setA = new HashSet<int> { 1, 2, 3, 4, 5 };
+            //HashSet<int> setB = new HashSet<int> { 4, 5, 6, 7, 8 };
+
+
+            //// UnionWith -> all elements from A and B (no duplicates)
+            //HashSet<int> union = new HashSet<int>(setA);
+            //union.UnionWith(setB);
+            //Console.WriteLine("Union: " + string.Join(", ", union));
+
+            //// IntersectWith -> only elements found in BOTH A and B
+            //HashSet<int> intersect = new HashSet<int>(setA);
+            //intersect.IntersectWith(setB);
+            //Console.WriteLine("Intersect: " + string.Join(", ", intersect));
+
+            //// ExceptWith -> elements in A that are NOT in B
+            //HashSet<int> except = new HashSet<int>(setA);
+            //except.ExceptWith(setB);
+            //Console.WriteLine("Except: " + string.Join(", ", except));
+
+
+            //HashSet<int> small = new HashSet<int> { 1, 2 };
+            //Console.WriteLine( small.IsSubsetOf(setA));
+            //#endregion
+
+            #region Exercise 5: Print Queue Simulator
             
-            HashSet<string> emails = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            Queue<string> printQueue = new Queue<string>();
+            printQueue.Enqueue("Report.pdf");
+            printQueue.Enqueue("Invoice.pdf");
+            printQueue.Enqueue("Letter.docx");
+            printQueue.Enqueue("Resume.pdf");
+            printQueue.Enqueue("Photo.jpg");
+
+            Console.WriteLine("Queue: " + string.Join(", ", printQueue));
+            Console.WriteLine($"Count: {printQueue.Count}");
+
+            Console.WriteLine($"Next to print: {printQueue.Peek()}");
+            Console.WriteLine($"Count after Peek: {printQueue.Count}"); // still 5
 
             
-            Console.WriteLine($"Add ahmed@test.com: {emails.Add("ahmed@test.com")}");
-            Console.WriteLine($"Add AHMED@test.com: {emails.Add("AHMED@test.com")}");
-            Console.WriteLine($"Add sara@test.com: {emails.Add("sara@test.com")}");
-            Console.WriteLine($"Add Sara@Test.Com: {emails.Add("Sara@Test.Com")}");
-
-            Console.WriteLine($"Count: {emails.Count}");
-            Console.WriteLine("Stored: " + string.Join(", ", emails));
-            Console.WriteLine();
-
-            HashSet<int> setA = new HashSet<int> { 1, 2, 3, 4, 5 };
-            HashSet<int> setB = new HashSet<int> { 4, 5, 6, 7, 8 };
-
-
-            // UnionWith -> all elements from A and B (no duplicates)
-            HashSet<int> union = new HashSet<int>(setA);
-            union.UnionWith(setB);
-            Console.WriteLine("Union: " + string.Join(", ", union));
-
-            // IntersectWith -> only elements found in BOTH A and B
-            HashSet<int> intersect = new HashSet<int>(setA);
-            intersect.IntersectWith(setB);
-            Console.WriteLine("Intersect: " + string.Join(", ", intersect));
-
-            // ExceptWith -> elements in A that are NOT in B
-            HashSet<int> except = new HashSet<int>(setA);
-            except.ExceptWith(setB);
-            Console.WriteLine("Except: " + string.Join(", ", except));
-
             
-            HashSet<int> small = new HashSet<int> { 1, 2 };
-            Console.WriteLine( small.IsSubsetOf(setA));
+            while (printQueue.Count > 0)
+            {
+                string doc = printQueue.Dequeue();
+                Console.WriteLine($"Printing: {doc}");
+            }
+            Console.WriteLine($"Count after printing: {printQueue.Count}");
+
+           // returns false, no exception
+            if (printQueue.TryDequeue(out string nextDoc))
+                Console.WriteLine($"Printing: {nextDoc}");
+            else
+                Console.WriteLine(" Queue is empty, nothing to print");
             #endregion
         }
     }
